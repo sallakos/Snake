@@ -29,6 +29,8 @@ let viimeinenOsa = {
 };
 let kaynnissa = false;
 let pause = false;
+let bite = new Audio("sounds/bite.mp3");
+let gameOver = new Audio("sounds/gameover.wav");
 
 const gameCanvas = document.getElementById("gameCanvas");
 const ctx = gameCanvas.getContext("2d"); // Piirretään 2D -canvas.
@@ -98,6 +100,7 @@ function main() {
     // Jos peli päättyy, poistetaan piiloon mennyt pää, piirretään snake
     // ja piirretään aiempi viimeinen osa. Poistutaan ohjelmasta.
     else {
+      gameOver.play();
       palaa();
       piirraSnake();
       piirraSnakeOsa(viimeinenOsa);
@@ -174,6 +177,7 @@ function liikuta() {
 
   // Jos söi ruokaa, luodaan uusi, muuten poistetaan viimeinen käärmeen osa.
   if (soiRuokaa) {
+    bite.play();
     score++;
     if (score % 5 == 0) {
       nopeus -= 10;
